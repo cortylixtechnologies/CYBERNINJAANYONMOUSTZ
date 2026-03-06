@@ -214,7 +214,7 @@ export default function App() {
   const handleEnrollSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const message = `*New Enrollment Request*%0A%0A*Name:* ${formData.name}%0A*Email:* ${formData.email}%0A*Phone:* ${formData.phone}%0A*Module:* ${formData.module}`;
-    const whatsappNumber = '1234567890'; // Demo number
+    const whatsappNumber = '255762223306'; // Updated to user provided number
     window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
     setIsEnrollModalOpen(false);
   };
@@ -501,14 +501,15 @@ export default function App() {
                 <Smartphone className="w-6 h-6" />
               </div>
               <h4 className="font-mono text-sm uppercase tracking-widest mb-2 text-white">Phone</h4>
-              <p className="text-white/60 font-mono">+1 (555) CYBER-99</p>
+              <p className="text-white/60 font-mono">+255 762 223 306</p>
             </div>
             <div className="p-8 bg-cyber-gray border border-white/5 hover:border-cyber-green/30 transition-all">
               <div className="w-12 h-12 bg-cyber-black flex items-center justify-center mx-auto mb-6 text-cyber-green">
                 <Globe className="w-6 h-6" />
               </div>
               <h4 className="font-mono text-sm uppercase tracking-widest mb-2 text-white">Email</h4>
-              <p className="text-white/60 font-mono">ops@cyberninja.academy</p>
+              <p className="text-white/60 font-mono text-xs">nobodyerror255@gmail.com</p>
+              <p className="text-white/60 font-mono text-xs">espectrofederal@gmail.com</p>
             </div>
             <div className="p-8 bg-cyber-gray border border-white/5 hover:border-cyber-green/30 transition-all">
               <div className="w-12 h-12 bg-cyber-black flex items-center justify-center mx-auto mb-6 text-cyber-green">

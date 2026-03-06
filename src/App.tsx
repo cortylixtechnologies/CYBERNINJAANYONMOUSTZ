@@ -23,6 +23,7 @@ import {
   Ghost, 
   Trash2, 
   Activity,
+  MapPin,
   ChevronRight,
   Menu,
   X,
@@ -202,6 +203,21 @@ export default function App() {
   const [activeCategory, setActiveCategory] = useState('All');
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [isEnrollModalOpen, setIsEnrollModalOpen] = useState(false);
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    phone: '',
+    module: topics[0].title
+  });
+
+  const handleEnrollSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const message = `*New Enrollment Request*%0A%0A*Name:* ${formData.name}%0A*Email:* ${formData.email}%0A*Phone:* ${formData.phone}%0A*Module:* ${formData.module}`;
+    const whatsappNumber = '1234567890'; // Demo number
+    window.open(`https://wa.me/${whatsappNumber}?text=${message}`, '_blank');
+    setIsEnrollModalOpen(false);
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -236,7 +252,10 @@ export default function App() {
                 {item}
               </a>
             ))}
-            <button className="px-6 py-2 bg-transparent border border-cyber-green text-cyber-green font-mono text-sm uppercase tracking-widest hover:bg-cyber-green hover:text-black transition-all duration-300">
+            <button 
+              onClick={() => setIsEnrollModalOpen(true)}
+              className="px-6 py-2 bg-transparent border border-cyber-green text-cyber-green font-mono text-sm uppercase tracking-widest hover:bg-cyber-green hover:text-black transition-all duration-300"
+            >
               Enroll Now
             </button>
           </div>
@@ -268,7 +287,13 @@ export default function App() {
                   {item}
                 </a>
               ))}
-              <button className="w-full py-4 bg-cyber-green text-black font-mono text-lg uppercase tracking-widest font-bold">
+              <button 
+                onClick={() => {
+                  setIsEnrollModalOpen(true);
+                  setIsMenuOpen(false);
+                }}
+                className="w-full py-4 bg-cyber-green text-black font-mono text-lg uppercase tracking-widest font-bold"
+              >
                 Enroll Now
               </button>
             </div>
@@ -298,12 +323,18 @@ export default function App() {
               Master the art of offensive security. From network infiltration to advanced exploit development, we train the next generation of elite cybersecurity professionals.
             </p>
             <div className="flex flex-wrap gap-4">
-              <button className="px-8 py-4 bg-cyber-green text-black font-mono font-bold uppercase tracking-widest hover:bg-white transition-colors flex items-center gap-2">
+              <button 
+                onClick={() => setIsEnrollModalOpen(true)}
+                className="px-8 py-4 bg-cyber-green text-black font-mono font-bold uppercase tracking-widest hover:bg-white transition-colors flex items-center gap-2"
+              >
                 Start Training <ChevronRight className="w-5 h-5" />
               </button>
-              <button className="px-8 py-4 bg-transparent border border-white/20 text-white font-mono font-bold uppercase tracking-widest hover:border-cyber-green hover:text-cyber-green transition-all">
+              <a 
+                href="#curriculum"
+                className="px-8 py-4 bg-transparent border border-white/20 text-white font-mono font-bold uppercase tracking-widest hover:border-cyber-green hover:text-cyber-green transition-all"
+              >
                 View Syllabus
-              </button>
+              </a>
             </div>
           </motion.div>
         </div>
@@ -416,6 +447,170 @@ export default function App() {
         </div>
       </section>
 
+      {/* About Section */}
+      <section id="about" className="py-24 px-6 bg-cyber-gray relative overflow-hidden">
+        <div className="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-16">
+          <div className="lg:w-1/2">
+            <h2 className="text-4xl md:text-5xl font-bold mb-8">
+              ABOUT <span className="text-cyber-green">CYBER NINJA</span>
+            </h2>
+            <div className="space-y-6 text-white/70 leading-relaxed font-sans text-lg">
+              <p>
+                Cyber Ninja Academy was born from the shadows of the digital frontier. We are not just an educational institution; we are a specialized training ground for the next generation of cybersecurity elite.
+              </p>
+              <p>
+                Our mission is to bridge the gap between theoretical knowledge and real-world offensive security. We believe that to protect a system, one must first understand how to dismantle it. Our curriculum is designed by industry veterans who have operated at the highest levels of global security.
+              </p>
+              <p>
+                At Cyber Ninja, we emphasize the "Ninja" philosophy: precision, stealth, and unwavering ethics. Every student who passes through our gates is trained to be a digital warrior, capable of defending the most critical infrastructures against the most sophisticated threats.
+              </p>
+            </div>
+          </div>
+          <div className="lg:w-1/2 relative">
+            <div className="aspect-square bg-cyber-black border border-cyber-green/20 p-4 relative">
+              <div className="absolute inset-0 cyber-grid opacity-30" />
+              <img 
+                src="https://picsum.photos/seed/cyber-security/800/800" 
+                alt="Cyber Security Training" 
+                className="w-full h-full object-cover grayscale contrast-125 opacity-80"
+                referrerPolicy="no-referrer"
+              />
+              <div className="absolute top-0 left-0 w-full h-full border-4 border-cyber-green/10 pointer-events-none" />
+            </div>
+            {/* Floating Data Points */}
+            <div className="absolute -top-4 -right-4 bg-cyber-green text-black p-4 font-mono text-xs font-bold">
+              EST. 2024 // ALPHA_PHASE
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="py-24 px-6 bg-cyber-black border-t border-white/5">
+        <div className="max-w-7xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-8">
+            GET IN <span className="text-cyber-green">TOUCH</span>
+          </h2>
+          <p className="text-white/50 max-w-2xl mx-auto mb-16 font-mono uppercase tracking-widest">
+            Have questions about our training programs? Our recruitment officers are standing by.
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="p-8 bg-cyber-gray border border-white/5 hover:border-cyber-green/30 transition-all">
+              <div className="w-12 h-12 bg-cyber-black flex items-center justify-center mx-auto mb-6 text-cyber-green">
+                <Smartphone className="w-6 h-6" />
+              </div>
+              <h4 className="font-mono text-sm uppercase tracking-widest mb-2 text-white">Phone</h4>
+              <p className="text-white/60 font-mono">+1 (555) CYBER-99</p>
+            </div>
+            <div className="p-8 bg-cyber-gray border border-white/5 hover:border-cyber-green/30 transition-all">
+              <div className="w-12 h-12 bg-cyber-black flex items-center justify-center mx-auto mb-6 text-cyber-green">
+                <Globe className="w-6 h-6" />
+              </div>
+              <h4 className="font-mono text-sm uppercase tracking-widest mb-2 text-white">Email</h4>
+              <p className="text-white/60 font-mono">ops@cyberninja.academy</p>
+            </div>
+            <div className="p-8 bg-cyber-gray border border-white/5 hover:border-cyber-green/30 transition-all">
+              <div className="w-12 h-12 bg-cyber-black flex items-center justify-center mx-auto mb-6 text-cyber-green">
+                <MapPin className="w-6 h-6" />
+              </div>
+              <h4 className="font-mono text-sm uppercase tracking-widest mb-2 text-white">Location</h4>
+              <p className="text-white/60 font-mono">Encrypted Node // Global</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Enrollment Modal */}
+      <AnimatePresence>
+        {isEnrollModalOpen && (
+          <div className="fixed inset-0 z-[100] flex items-center justify-center p-6">
+            <motion.div 
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              onClick={() => setIsEnrollModalOpen(false)}
+              className="absolute inset-0 bg-cyber-black/80 backdrop-blur-sm"
+            />
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.9, opacity: 0, y: 20 }}
+              className="relative w-full max-w-lg bg-cyber-gray border border-cyber-green/30 p-8 shadow-2xl shadow-cyber-green/10"
+            >
+              <button 
+                onClick={() => setIsEnrollModalOpen(false)}
+                className="absolute top-4 right-4 text-white/50 hover:text-white"
+              >
+                <X className="w-6 h-6" />
+              </button>
+              
+              <h3 className="text-2xl font-bold mb-2 uppercase tracking-tighter">
+                ENROLL <span className="text-cyber-green">NOW</span>
+              </h3>
+              <p className="text-white/50 text-sm font-mono uppercase tracking-widest mb-8">
+                Initialize your training sequence.
+              </p>
+
+              <form onSubmit={handleEnrollSubmit} className="space-y-6">
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-widest text-white/50 mb-2">Full Name</label>
+                  <input 
+                    required
+                    type="text" 
+                    value={formData.name}
+                    onChange={(e) => setFormData({...formData, name: e.target.value})}
+                    className="w-full bg-cyber-black border border-white/10 p-3 text-white focus:border-cyber-green outline-none transition-colors font-mono"
+                    placeholder="ENTER IDENTITY"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-widest text-white/50 mb-2">Email Address</label>
+                  <input 
+                    required
+                    type="email" 
+                    value={formData.email}
+                    onChange={(e) => setFormData({...formData, email: e.target.value})}
+                    className="w-full bg-cyber-black border border-white/10 p-3 text-white focus:border-cyber-green outline-none transition-colors font-mono"
+                    placeholder="EMAIL@DOMAIN.COM"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-widest text-white/50 mb-2">Phone Number</label>
+                  <input 
+                    required
+                    type="tel" 
+                    value={formData.phone}
+                    onChange={(e) => setFormData({...formData, phone: e.target.value})}
+                    className="w-full bg-cyber-black border border-white/10 p-3 text-white focus:border-cyber-green outline-none transition-colors font-mono"
+                    placeholder="+1 (XXX) XXX-XXXX"
+                  />
+                </div>
+                <div>
+                  <label className="block text-xs font-mono uppercase tracking-widest text-white/50 mb-2">Target Module</label>
+                  <select 
+                    value={formData.module}
+                    onChange={(e) => setFormData({...formData, module: e.target.value})}
+                    className="w-full bg-cyber-black border border-white/10 p-3 text-white focus:border-cyber-green outline-none transition-colors font-mono appearance-none"
+                  >
+                    {topics.map(t => (
+                      <option key={t.id} value={t.title}>{t.title}</option>
+                    ))}
+                  </select>
+                </div>
+
+                <button 
+                  type="submit"
+                  className="w-full py-4 bg-cyber-green text-black font-mono font-bold uppercase tracking-widest hover:bg-white transition-colors"
+                >
+                  Submit Application
+                </button>
+              </form>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
+
       {/* Footer */}
       <footer className="bg-cyber-black border-t border-white/5 pt-20 pb-10 px-6">
         <div className="max-w-7xl mx-auto">
@@ -444,9 +639,14 @@ export default function App() {
             <div>
               <h4 className="font-mono text-sm uppercase tracking-widest mb-6 text-white">Links</h4>
               <ul className="flex flex-col gap-4">
-                {['Curriculum', 'About Us', 'Success Stories', 'FAQ'].map((item) => (
-                  <li key={item}>
-                    <a href="#" className="text-white/40 hover:text-cyber-green transition-colors text-sm">{item}</a>
+                {[
+                  { name: 'Curriculum', href: '#curriculum' },
+                  { name: 'About Us', href: '#about' },
+                  { name: 'Contact', href: '#contact' },
+                  { name: 'FAQ', href: '#' }
+                ].map((item) => (
+                  <li key={item.name}>
+                    <a href={item.href} className="text-white/40 hover:text-cyber-green transition-colors text-sm">{item.name}</a>
                   </li>
                 ))}
               </ul>
